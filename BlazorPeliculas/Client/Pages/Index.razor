@@ -7,12 +7,23 @@ Welcome to your new app.
 <SurveyPrompt Title="How is Blazor working for you?" />*@
 
 <p>Hola, @EnMayiscular(nombre)  </p>
+<p>Vamo a sumar 2 +2 =@(2+2)</p>
+
+
+<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>
+
 
 @code {
     string nombre = "Homero";
 
     //exprecion implicita, no sabe donde empieza y donde terman
     string EnMayiscular(string valor) => valor.ToUpper();
+
+
+    private void manejarClick()
+    {
+
+    }
 
 }
 
