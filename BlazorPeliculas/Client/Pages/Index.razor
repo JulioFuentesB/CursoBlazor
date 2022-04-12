@@ -1,0 +1,18 @@
+﻿@page "/"
+
+@*<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />*@
+
+<p>Hola, @EnMayiscular(nombre)  </p>
+
+@code {
+    string nombre = "Homero";
+
+    //exprecion implicita, no sabe donde empieza y donde terman
+    string EnMayiscular(string valor) => valor.ToUpper();
+
+}
+
