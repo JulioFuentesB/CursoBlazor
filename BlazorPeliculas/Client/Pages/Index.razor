@@ -10,7 +10,8 @@ Welcome to your new app.
 <p>Vamo a sumar 2 +2 =@(2+2)</p>
 
 
-<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>
+@*<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>*@
+<button @onclick="@ManejarClick">Precioname</button>
 
 
 @code {
@@ -20,9 +21,9 @@ Welcome to your new app.
     string EnMayiscular(string valor) => valor.ToUpper();
 
 
-    private void manejarClick()
+    private void ManejarClick()
     {
-
+        Console.WriteLine("Me han clikeado");
     }
 
 }
