@@ -1,12 +1,14 @@
 ﻿@page "/"
+@*@using  BlazorPeliculas.Client.Helpers*@
+
 
 @*<h1>Hello, world!</h1>
 
-Welcome to your new app.
+    Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />*@
+    <SurveyPrompt Title="How is Blazor working for you?" />*@
 
-<p>Hola, @EnMayiscular(nombre)  </p>
+<p>Hola, @UtilidadesString.EnMayiscular(nombre)  </p>
 <p>Vamo a sumar 2 +2 =@(2+2)</p>
 
 
@@ -17,8 +19,14 @@ Welcome to your new app.
 @code {
     string nombre = "Homero";
 
-    //exprecion implicita, no sabe donde empieza y donde terman
-    string EnMayiscular(string valor) => valor.ToUpper();
+
+    //public class UtilidadesString
+    //{
+    //    //exprecion implicita, no sabe donde empieza y donde terman
+    //   public static string EnMayiscular(string valor) => valor.ToUpper();
+    //}
+
+
 
 
     private void ManejarClick()
