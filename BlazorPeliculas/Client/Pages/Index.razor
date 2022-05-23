@@ -15,6 +15,42 @@
 @*<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>*@
 <button @onclick="@ManejarClick">Precioname</button>
 
+<div>
+    <h3>Pelicula</h3>
+    <p>Titulo: <b>@SpiderMan.Titulo</b></p>
+    <p>Fecha Lanzamiento: <b>@SpiderMan.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+</div>
+
+<hr />
+
+<div>
+    <h3>Peliculas foreach</h3>
+    @foreach (var pelicla in ObtenerPeliculas())
+    {
+        <div>
+            <p>Titulo: <b>@pelicla.Titulo</b></p>
+            <p>Fecha Lanzamiento: <b>@pelicla.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+        </div>
+    }
+</div>
+
+<hr />
+
+<div>
+    <h3>Peliculas for</h3>
+
+
+    @for (int i = 0; i < Peliculas.Count(); i++)
+    {
+        <div>
+            <p>@(i+1)  ) Titulo: <b>@Peliculas[i].Titulo</b></p>
+            <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+        </div>
+    }
+</div>
+
+
+
 
 @code {
     string nombre = "Homero";
@@ -33,6 +69,37 @@
     {
         Console.WriteLine("Me han clikeado");
     }
+
+    public Peliculas SpiderMan
+    {
+        get { return ObtenerPelicula(); }
+    }
+    public List<Peliculas> Peliculas
+    {
+        get { return ObtenerPeliculas(); }
+    }
+
+
+    private new List<Peliculas> ObtenerPeliculas()
+    {
+        return new List<Peliculas>()
+    {
+            new Peliculas(){Titulo="Spider-Man: Far From Home",FechaLanzamiento= new DateTime(2019,7,2)},
+            new Peliculas(){Titulo="Moana",FechaLanzamiento= new DateTime(2016,11,23)},
+            new Peliculas(){Titulo="Inceptio",FechaLanzamiento= new DateTime(2010,7,16)},
+        };
+    }
+
+
+    private Peliculas ObtenerPelicula()
+    {
+        return new Peliculas()
+        {
+            Titulo = "Spider-Man: Far From Home",
+            FechaLanzamiento = new DateTime(2019, 7, 2)
+        };
+    }
+
 
 }
 
