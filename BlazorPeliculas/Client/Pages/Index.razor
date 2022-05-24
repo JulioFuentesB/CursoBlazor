@@ -15,39 +15,59 @@
 @*<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>*@
 <button @onclick="@ManejarClick">Precioname</button>
 
-<div>
-    <h3>Pelicula</h3>
-    <p>Titulo: <b>@SpiderMan.Titulo</b></p>
-    <p>Fecha Lanzamiento: <b>@SpiderMan.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
-</div>
+@*<div>
+        <h3>Pelicula</h3>
+        <p>Titulo: <b>@SpiderMan.Titulo</b></p>
+        <p>Fecha Lanzamiento: <b>@SpiderMan.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+    </div>
+
+    <hr />
+
+    <div>
+        <h3>Peliculas foreach</h3>
+        @foreach (var pelicla in ObtenerPeliculas())
+        {
+            <div>
+                <p>Titulo: <b>@pelicla.Titulo</b></p>
+                <p>Fecha Lanzamiento: <b>@pelicla.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+            </div>
+        }
+    </div>*@
 
 <hr />
+@if (Peliculas == null)
 
-<div>
-    <h3>Peliculas foreach</h3>
-    @foreach (var pelicla in ObtenerPeliculas())
-    {
-        <div>
-            <p>Titulo: <b>@pelicla.Titulo</b></p>
-            <p>Fecha Lanzamiento: <b>@pelicla.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
-        </div>
-    }
-</div>
+{
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+    <text>Cargando...</text>
+}
+else if (Peliculas.Count() == 0)
+{
+    <text>No hay registros para mostrar.</text>
+}
 
-<hr />
-
-<div>
-    <h3>Peliculas for</h3>
+else
+{
+    <div>
+        <h3>Peliculas for</h3>
 
 
-    @for (int i = 0; i < Peliculas.Count(); i++)
-    {
-        <div>
-            <p>@(i+1)  ) Titulo: <b>@Peliculas[i].Titulo</b></p>
-            <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MM yyyy")</b></p>
-        </div>
-    }
-</div>
+        @for (int i = 0; i < Peliculas.Count(); i++)
+        {
+            @if (i == Peliculas.Count() - 1)
+            {
+                <p>Esta es la ultima pelicula</p>
+            }
+
+            <div>
+                <p>@(i+1)  ) Titulo: <b>@Peliculas[i].Titulo</b></p>
+                <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+            </div>
+        }
+    </div>
+}
+
+
 
 
 
@@ -65,6 +85,7 @@
 
 
 
+
     private void ManejarClick()
     {
         Console.WriteLine("Me han clikeado");
@@ -74,16 +95,29 @@
     {
         get { return ObtenerPelicula(); }
     }
-    public List<Peliculas> Peliculas
+    //public List<Peliculas> Peliculas
+    //{
+    //    get { return ObtenerPeliculas(); }
+    //}
+
+    public List<Peliculas> Peliculas;
+
+
+
+    protected override async Task OnInitializedAsync()
     {
-        get { return ObtenerPeliculas(); }
+        // Peliculas = repositorio.ObtenerPeliculas();
+
+        await Task.Delay(3000);
+        Peliculas = new List<Peliculas>();//ObtenerPeliculas();
+
     }
 
 
     private new List<Peliculas> ObtenerPeliculas()
     {
         return new List<Peliculas>()
-    {
+{
             new Peliculas(){Titulo="Spider-Man: Far From Home",FechaLanzamiento= new DateTime(2019,7,2)},
             new Peliculas(){Titulo="Moana",FechaLanzamiento= new DateTime(2016,11,23)},
             new Peliculas(){Titulo="Inceptio",FechaLanzamiento= new DateTime(2010,7,16)},
