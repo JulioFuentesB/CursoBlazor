@@ -1,90 +1,18 @@
 ﻿@page "/"
-@*@using  BlazorPeliculas.Client.Helpers*@
-
-
-@*<h1>Hello, world!</h1>
-
-    Welcome to your new app.
-
-    <SurveyPrompt Title="How is Blazor working for you?" />*@
 
 <p>Hola, @UtilidadesString.EnMayiscular(nombre)  </p>
 <p>Vamo a sumar 2 +2 =@(2+2)</p>
 
-
-@*<button  @onclick="@(()=> Console.WriteLine("Me han clikeado"))">Precioname</button>*@
 <button @onclick="@ManejarClick">Precioname</button>
 
-@*<div>
-        <h3>Pelicula</h3>
-        <p>Titulo: <b>@SpiderMan.Titulo</b></p>
-        <p>Fecha Lanzamiento: <b>@SpiderMan.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
-    </div>
-
-    <hr />
-
-    <div>
-        <h3>Peliculas foreach</h3>
-        @foreach (var pelicla in ObtenerPeliculas())
-        {
-            <div>
-                <p>Titulo: <b>@pelicla.Titulo</b></p>
-                <p>Fecha Lanzamiento: <b>@pelicla.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
-            </div>
-        }
-    </div>*@
 
 <hr />
-@if (Peliculas == null)
 
-{
-    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-    <text>Cargando...</text>
-}
-else if (Peliculas.Count() == 0)
-{
-    <text>No hay registros para mostrar.</text>
-}
-
-else
-{
-    <div>
-        <h3>Peliculas for</h3>
-
-
-        @for (int i = 0; i < Peliculas.Count(); i++)
-        {
-            @if (i == Peliculas.Count() - 1)
-            {
-                <p>Esta es la ultima pelicula</p>
-            }
-
-    <div>
-        <p>@(i + 1)) Título: @((MarkupString)Peliculas[i].Titulo)</p>
-        <p>Fecha Lanzamiento: <b>@Peliculas[i].FechaLanzamiento.ToString("dd MMM yyyy")</b></p>
-    </div>
-        }
-    </div>
-}
-
-
-
-
+<ListadoPeliculas></ListadoPeliculas>
 
 
 @code {
     string nombre = "Homero";
-
-
-    //public class UtilidadesString
-    //{
-    //    //exprecion implicita, no sabe donde empieza y donde terman
-    //   public static string EnMayiscular(string valor) => valor.ToUpper();
-    //}
-
-
-
-
 
     private void ManejarClick()
     {
@@ -95,35 +23,7 @@ else
     {
         get { return ObtenerPelicula(); }
     }
-    //public List<Peliculas> Peliculas
-    //{
-    //    get { return ObtenerPeliculas(); }
-    //}
-
-    public List<Peliculas> Peliculas;
-
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        // Peliculas = repositorio.ObtenerPeliculas();
-
-        await Task.Delay(3000);
-        Peliculas = ObtenerPeliculas();
-
-    }
-
-
-    private new List<Peliculas> ObtenerPeliculas()
-    {
-        return new List<Peliculas>()
-{
-            new Peliculas(){Titulo = "<b>Spider-Man</b>: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
-            new Peliculas(){Titulo = "<i>Moana</i>", FechaLanzamiento  = new DateTime(2016, 11, 23)},
-            new Peliculas(){Titulo = "Inception", FechaLanzamiento  = new DateTime(2010, 7, 16)}
-        };
-    }
-
+    
 
     private Peliculas ObtenerPelicula()
     {

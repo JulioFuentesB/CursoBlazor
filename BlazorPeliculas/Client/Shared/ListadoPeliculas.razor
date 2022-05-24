@@ -1,0 +1,51 @@
+﻿@if (Peliculas == null)
+
+{
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+    <text>Cargando...</text>
+}
+else if (Peliculas.Count() == 0)
+{
+    <text>No hay registros para mostrar.</text>
+}
+
+else
+{
+    <div>
+        <h3>Peliculas for</h3>
+
+
+        @foreach (var pelicla in Peliculas)
+        {
+            <div>
+                <p>Titulo: <b>@pelicla.Titulo</b></p>
+                <p>Fecha Lanzamiento: <b>@pelicla.FechaLanzamiento.ToString("dd MM yyyy")</b></p>
+            </div>
+        }
+    </div>
+}
+
+@code{
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Peliculas = repositorio.ObtenerPeliculas();
+
+        await Task.Delay(3000);
+        Peliculas = ObtenerPeliculas();
+
+    }
+
+    public List<Peliculas> Peliculas;
+    private new List<Peliculas> ObtenerPeliculas()
+    {
+        return new List<Peliculas>()
+{
+            new Peliculas(){Titulo = "<b>Spider-Man</b>: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
+            new Peliculas(){Titulo = "<i>Moana</i>", FechaLanzamiento  = new DateTime(2016, 11, 23)},
+            new Peliculas(){Titulo = "Inception", FechaLanzamiento  = new DateTime(2010, 7, 16)}
+        };
+    }
+}
