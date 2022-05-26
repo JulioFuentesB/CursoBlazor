@@ -11,6 +11,12 @@
 <ListadoPeliculas Peliculas="ObtenerPeliculas()"></ListadoPeliculas>
 
 
+<div>
+    <h2>Crear pelicula</h2>
+    <EjemploTexbox placeholder="Nombre pelicula" ></EjemploTexbox>
+</div>
+
+
 @code {
     string nombre = "Homero";
 
@@ -39,8 +45,8 @@
     {
         return new List<Peliculas>()
 {
-            new Peliculas(){Titulo = "<b>Spider-Man</b>: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
-            new Peliculas(){Titulo = "<i>Moana</i>", FechaLanzamiento  = new DateTime(2016, 11, 23)},
+            new Peliculas(){Titulo = "Spider-Man: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
+            new Peliculas(){Titulo = "Moana", FechaLanzamiento  = new DateTime(2016, 11, 23)},
             new Peliculas(){Titulo = "Inception", FechaLanzamiento  = new DateTime(2010, 7, 16)}
         };
     }
