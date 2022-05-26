@@ -11,16 +11,17 @@ else if (Peliculas.Count() == 0)
 
 else
 {
-    <div>
-        <h3>Peliculas for</h3>
+<div>
+    <h3>Peliculas for</h3>
 
-        <input type="checkbox"  @onchange="@(()=>MostrarBotones = !MostrarBotones)"/>
+    @*<input type="checkbox" @onchange="@(()=>MostrarBotones = !MostrarBotones)" />*@
+    <input type="checkbox" @bind="MostrarBotones" />
 
-        @foreach (var pelicula in Peliculas)
-        {
-           <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones" ></PeliculaIndividual>
-        }
-    </div>
+    @foreach (var pelicula in Peliculas)
+    {
+        <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones"></PeliculaIndividual>
+    }
+</div>
 }
 
 @code{
