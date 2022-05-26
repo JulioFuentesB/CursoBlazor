@@ -1,4 +1,7 @@
-﻿@if (Peliculas == null)
+﻿@inject IJSRuntime js
+
+
+@if (Peliculas == null)
 
 {
     <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
@@ -11,33 +14,42 @@ else if (Peliculas.Count() == 0)
 
 else
 {
-<div>
-    <h3>Peliculas for</h3>
+    <div>
+        <h3>Peliculas for</h3>
 
-    @*<input type="checkbox" @onchange="@(()=>MostrarBotones = !MostrarBotones)" />*@
-    <input type="checkbox" @bind="MostrarBotones" />
 
-    @foreach (var pelicula in Peliculas)
-    {
-        <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones"></PeliculaIndividual>
-    }
-</div>
+        <input type="checkbox" @bind="MostrarBotones" />
+
+        @foreach (var pelicula in Peliculas)
+        {
+            @*<PeliculaIndividual Pelicula="pelicula"
+                EliminarPelicula="EliminarPelicula"
+                MostrarBotones="MostrarBotones"></PeliculaIndividual>*@
+
+            <PeliculaIndividual Pelicula="pelicula" EliminarPelicula="EliminarPelicula"
+                                MostrarBotones="MostrarBotones" />
+        }
+    </div>
 }
 
 @code{
 
 
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    // Peliculas = repositorio.ObtenerPeliculas();
 
-    //    await Task.Delay(3000);
-    //    Peliculas = ObtenerPeliculas();
-
-    //}
 
     [Parameter] public List<Peliculas> Peliculas { get; set; }
     bool MostrarBotones = false;
+
+ 
+    //Peliculas pelicula = new Peliculas();
+
+    async Task EliminarPelicula(Peliculas pelicula)
+    {
+      
+            Peliculas.Remove(pelicula);
+            Console.WriteLine($"Se ha eliminado la pelicula {pelicula.Titulo}");
+      
+    }
 
 }

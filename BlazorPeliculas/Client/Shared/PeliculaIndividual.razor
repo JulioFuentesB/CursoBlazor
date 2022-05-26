@@ -9,7 +9,7 @@
     @if (MostrarBotones)
     {
         <div>
-            <button @onclick="Eliminar">Borrar</button>
+            <button @onclick="@(() => EliminarPelicula.InvokeAsync(Pelicula))">Borrar</button>
         </div>
     }
 
@@ -20,9 +20,8 @@
 @code {
     [Parameter] public Peliculas Pelicula { get; set; }
     [Parameter] public bool MostrarBotones { get; set; } = false;
+    [Parameter] public EventCallback<Peliculas> EliminarPelicula { get; set; }
 
-    void Eliminar()
-    {
-        Console.WriteLine($"Eliminar la pelicula: {Pelicula.Titulo}");
-    }
+
+
 }
