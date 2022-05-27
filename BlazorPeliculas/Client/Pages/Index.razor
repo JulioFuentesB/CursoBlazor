@@ -1,31 +1,46 @@
 ﻿@page "/"
 
-<p>Hola, @UtilidadesString.EnMayiscular(nombre)  </p>
-<p>Vamo a sumar 2 +2 =@(2+2)</p>
-
-<button @onclick="@ManejarClick">Precioname</button>
 
 
 <hr />
 
-<ListadoPeliculas Peliculas="ObtenerPeliculas()">
-    <Cargando>
-        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-    </Cargando>
-    <NoHayRegistros>
-        <text>No hay peliculas para mostrar.</text>
-    </NoHayRegistros>    
-</ListadoPeliculas>
-
-
 <div>
-    <h2>Crear pelicula</h2>
-    <EjemploTexbox placeholder="Nombre pelicula" ></EjemploTexbox>
+    <h3>Listado de peliculas</h3>
+    <ListadoPeliculas Peliculas="Peliculas">
+    </ListadoPeliculas>
 </div>
+
+<button  @onclick="AgregarPelicula" >Agregar pelicula</button>
+
+
 
 
 @code {
     string nombre = "Homero";
+
+
+
+    private List<Peliculas> Peliculas;
+
+    protected override void OnInitialized()
+    {
+
+        Peliculas = new List<Peliculas>()
+        {
+            new Peliculas(){Titulo = "Spider-Man: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
+            new Peliculas(){Titulo = "Moana", FechaLanzamiento  = new DateTime(2016, 11, 23)},
+            new Peliculas(){Titulo = "Inception", FechaLanzamiento  = new DateTime(2010, 7, 16)}
+        };
+
+    }
+
+
+    void AgregarPelicula()
+    {
+        Peliculas.Add(new Peliculas() { Titulo = "Nueva pelicula", FechaLanzamiento =  DateTime.Today });
+    }
+
+
 
     private void ManejarClick()
     {
@@ -48,15 +63,7 @@
     }
 
 
-    private new List<Peliculas> ObtenerPeliculas()
-    {
-        return new List<Peliculas>()
-{
-            new Peliculas(){Titulo = "Spider-Man: Far From Home", FechaLanzamiento  = new DateTime(2019, 7, 2)},
-            new Peliculas(){Titulo = "Moana", FechaLanzamiento  = new DateTime(2016, 11, 23)},
-            new Peliculas(){Titulo = "Inception", FechaLanzamiento  = new DateTime(2010, 7, 16)}
-        };
-    }
+
 
 
 }

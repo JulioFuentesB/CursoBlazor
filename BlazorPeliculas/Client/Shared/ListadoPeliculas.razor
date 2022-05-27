@@ -1,63 +1,53 @@
 ﻿@inject IJSRuntime js
 
 
-@if (Peliculas == null)
 
-{
-    @*<img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-    <text>Cargando...</text>*@
-
-
-
-    @if(Cargando == null)
-    {
-        <text>Cargando...</text>
-    }
-    else
-    {
-        @Cargando
-    }
-
-
-}
-else if (Peliculas.Count() == 0)
-{
-    @if(NoHayRegistros == null)
-    {
-        <text>No hay registros para mostrar.</text>
-    }
-    else
-    {
-        @NoHayRegistros
-    }
-   
-}
-
-else
-{
     <div>
         <h3>Peliculas for</h3>
 
-
         <input type="checkbox" @bind="MostrarBotones" />
 
-        @foreach (var pelicula in Peliculas)
-        {
-            @*<PeliculaIndividual Pelicula="pelicula"
-                EliminarPelicula="EliminarPelicula"
-                MostrarBotones="MostrarBotones"></PeliculaIndividual>*@
-
-            <PeliculaIndividual Pelicula="pelicula" EliminarPelicula="EliminarPelicula"
-                                MostrarBotones="MostrarBotones" />
-        }
+        <ListadoGenerco  Listado="Peliculas">
+            <HayRegistros Context="pelicula">
+                <PeliculaIndividual Pelicula="pelicula" EliminarPelicula="EliminarPelicula" MostrarBotones="MostrarBotones" />
+            </HayRegistros>
+        </ListadoGenerco>
     </div>
-}
 
-@code{
+
+@code{ 
 
     [Parameter] public List<Peliculas> Peliculas { get; set; }
-    [Parameter] public RenderFragment Cargando { get; set; }
-    [Parameter] public RenderFragment NoHayRegistros { get; set; }
+
+
+    //inicializar un componente
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("OnInitialized");
+    }
+
+    //ejecutar una accion cada vez que se cambie un parametro
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("OnParametersSet");
+    }
+
+
+    //se ejecuta cuando se renderiza el html
+    protected override void OnAfterRender( bool primeraRenderizacion)
+    {
+        Console.WriteLine($"OnAfterRender: primera vez:{primeraRenderizacion}");
+    }
+
+
+    //indicar si se quiere renderizar un componete con unresepcto a un cambio realizado
+    protected override bool  ShouldRender()
+    {
+        Console.WriteLine("OnParametersSet");
+        return true;
+    }
+
+
 
     bool MostrarBotones = false;
 
@@ -69,6 +59,4 @@ else
         Peliculas.Remove(pelicula);
         Console.WriteLine($"Se ha eliminado la pelicula {pelicula.Titulo}");
 
-    }
-
-}
+    } }
