@@ -56,8 +56,13 @@
     async Task EliminarPelicula(Peliculas pelicula)
     {
 
-        Peliculas.Remove(pelicula);
-        Console.WriteLine($"Se ha eliminado la pelicula {pelicula.Titulo}");
+        var confirmado = await js.Confirm( $"Desea borrar la pelicula {pelicula.Titulo}?");
+
+        if(confirmado)
+        {
+            Peliculas.Remove(pelicula);
+            Console.WriteLine($"Se ha eliminado la pelicula {pelicula.Titulo}");
+        }
 
     }
     }
