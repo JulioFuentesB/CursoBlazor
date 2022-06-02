@@ -7,7 +7,7 @@
 
 <div>
     <h3>Listado de peliculas</h3>
-    <ListadoPeliculas Peliculas="Peliculas">
+    <ListadoPeliculas  Peliculas="Peliculas">
     </ListadoPeliculas>
 </div>
 
@@ -19,14 +19,14 @@
 @code {
     string nombre = "Homero";
 
-
+    ListadoPeliculas listado;
 
     private List<Peliculas> Peliculas;
 
     protected override void OnInitialized()
     {
-
-        Peliculas = repositorio.ObtenrPeliculas();     
+        //var lista = listado.Peliculas;
+        Peliculas = repositorio.ObtenrPeliculas();
 
     }
 
