@@ -4,14 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static BlazorPeliculas.Client.Shared.MainLayout;
 
-//using Microsoft.AspNetCore.Components;
-//using Microsoft.JSInterop;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using static BlazorPeliculas.Client.Shared.MainLayout;
 
 namespace BlazorPeliculas.Client.Pages
 {
@@ -20,7 +14,9 @@ namespace BlazorPeliculas.Client.Pages
         [Inject] ServicioSingleton singleton { get; set; }
         [Inject] ServicioTransient transient { get; set; }
         [Inject] protected IJSRuntime JS { get; set; }
-      //  [CascadingParameter] protected AppState appState { get; set; }
+        [CascadingParameter] protected AppState appState { get; set; }
+        //[CascadingParameter] protected string color { get; set; }
+
 
         IJSObjectReference modulo;
 
