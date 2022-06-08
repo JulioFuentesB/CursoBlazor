@@ -1,8 +1,5 @@
 ﻿@page "/"
 @inject IRepositorio repositorio
-
-
-
 <hr />
 
 <div>
@@ -11,15 +8,7 @@
     </ListadoPeliculas>
 </div>
 
-<button  @onclick="AgregarPelicula" >Agregar pelicula</button>
-
-
-
-
-@code {
-    string nombre = "Homero";
-
-    ListadoPeliculas listado;
+@code { 
 
     private List<Peliculas> Peliculas;
 
@@ -29,38 +18,6 @@
         Peliculas = repositorio.ObtenrPeliculas();
 
     }
-
-
-    void AgregarPelicula()
-    {
-        Peliculas.Add(new Peliculas() { Titulo = "Nueva pelicula", FechaLanzamiento =  DateTime.Today });
-    }
-
-
-
-    private void ManejarClick()
-    {
-        Console.WriteLine("Me han clikeado");
-    }
-
-    public Peliculas SpiderMan
-    {
-        get { return ObtenerPelicula(); }
-    }
-
-
-    private Peliculas ObtenerPelicula()
-    {
-        return new Peliculas()
-        {
-            Titulo = "Spider-Man: Far From Home",
-            FechaLanzamiento = new DateTime(2019, 7, 2)
-        };
-    }
-
-
-
-
-
+   
 }
 
