@@ -1,25 +1,11 @@
 ﻿@page "/generos/crear"
 
 <h3>CrearGenero</h3>
-
-<EditForm Model="Genero" OnSubmit="Crear" >
-    <div class="form-group">
-        <label>
-            Nombre:
-        </label>
-        <div>
-            <InputText  class="form-control" @bind-Value=@Genero.Nombre>  </InputText>
-        </div>
-
-    </div>
-    <button class="btn btn-success" type="submit" > Guardar  Cambios</button>
-
-</EditForm>
-
+<FormularioGenero Genero="Genero" OnValidSubmit="Crear"  ></FormularioGenero>
 
 @code {
 
-    private Generos Genero= new Generos();
+    private Generos Genero = new Generos();
 
     private void Crear()
     {
