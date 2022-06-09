@@ -1,10 +1,10 @@
 ﻿
 <div style="margin-right:2%; margin-bottom:10px; text-align:center" >
-    <a>
+    <a href="@urlPelicula" >
         <img  src="@Pelicula.Poster" style="width:225px; height:300px;"/>
     </a>
     <p style="max-width:225px; height:44px; font-size: 15px; font-weight:bold;" >
-        @Pelicula.TituloCortado
+        <a href="@urlPelicula">@Pelicula.TituloCortado</a>
     </p>
     <div>
         <a class="btn btn-info"  >Editar</a>
@@ -19,6 +19,11 @@
     [Parameter] public Peliculas Pelicula { get; set; }
     [Parameter] public bool MostrarBotones { get; set; } = false;
     [Parameter] public EventCallback<Peliculas> EliminarPelicula { get; set; }
+    private string urlPelicula = string.Empty;
 
+    protected override void OnInitialized()
+    {
+        urlPelicula = $"pelicula";
+    }
 
 }
