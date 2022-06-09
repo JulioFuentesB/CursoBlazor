@@ -4,20 +4,20 @@
 
 <div>
     <h3>Listado de peliculas</h3>
-    <ListadoPeliculas  Peliculas="Peliculas">
+    <ListadoPeliculas Peliculas="PeliculasIndex">
     </ListadoPeliculas>
 </div>
 
-@code { 
+@code {
 
-    private List<Peliculas> Peliculas;
+    private List<BlazorPeliculas.Shared.Entidades.Peliculas> PeliculasIndex;
 
     protected override void OnInitialized()
     {
         //var lista = listado.Peliculas;
-        Peliculas = repositorio.ObtenrPeliculas();
+        PeliculasIndex = repositorio.ObtenrPeliculas();
 
     }
-   
+
 }
 
