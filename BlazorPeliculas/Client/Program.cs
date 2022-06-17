@@ -19,7 +19,8 @@ namespace BlazorPeliculas.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            
+          //  builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44384/") });
+
             ConfigureServices(builder.Services);
 
             await builder.Build().RunAsync();
@@ -29,7 +30,7 @@ namespace BlazorPeliculas.Client
         {
             services.AddSingleton<ServicioSingleton>();
             services.AddTransient<ServicioTransient>();
-            services.AddSingleton<IRepositorio, Repositorio>();
+            services.AddScoped<IRepositorio, Repositorio>();
         }
 
     }

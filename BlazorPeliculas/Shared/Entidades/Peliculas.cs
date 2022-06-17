@@ -19,6 +19,8 @@ namespace BlazorPeliculas.Shared.Entidades
         public DateTime? FechaLanzamiento { get; set; }
         public string Poster { get; set; }
         public List<GenerosPeliculas> GenerosPelicula { get; set; } = new List<GenerosPeliculas>();
+        public List<PeliculasActores> PeliculasActor { get; set; }
+
         public string TituloCortado
         {
             get

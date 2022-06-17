@@ -8,6 +8,8 @@ namespace BlazorPeliculas.Client.Repositorios
 {
     public interface IRepositorio
     {
+        Task<HttpResponseWrapper<T>> Get<T>(string url);
         List<Peliculas> ObtenrPeliculas();
+        Task<HttpResponseWrapper<object>> Post<T>(string url, T enviar);
     }
 }
