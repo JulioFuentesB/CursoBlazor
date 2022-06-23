@@ -35,14 +35,14 @@ namespace BlazorPeliculas.Server.Controllers
 
             var peliculasEnCartelera = await context.Peliculas
                 .Where(x => x.EnCartelera).Take(limite)
-                .OrderByDescending(x => x.Lanzamiento)
+                .OrderByDescending(x => x.FechaLanzamiento)
                 .ToListAsync();
 
             var fechaActual = DateTime.Today;
 
             var proximosEstrenos = await context.Peliculas
-                .Where(x => x.Lanzamiento > fechaActual)
-                .OrderBy(x => x.Lanzamiento).Take(limite)
+                .Where(x => x.FechaLanzamiento > fechaActual)
+                .OrderBy(x => x.FechaLanzamiento).Take(limite)
                 .ToListAsync();
 
             var response = new HomePageDTO()
@@ -75,12 +75,12 @@ namespace BlazorPeliculas.Server.Controllers
             model.Pelicula = pelicula;
             model.Generos = pelicula.GenerosPelicula.Select(x => x.Genero).ToList();
             model.Actores = pelicula.PeliculasActor.Select(x =>
-            new Persona
+            new Personas
             {
                 Nombre = x.Persona.Nombre,
                 Foto = x.Persona.Foto,
-                Personaje = x.Personaje,
-                Id = x.PersonaId
+                //Personaje = x.Personaje,
+                Id = x.PersonasId
             }).ToList();
 
             model.PromedioVotos = promedioVotos;
@@ -89,7 +89,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet("filtrar")]
-        public async Task<ActionResult<List<Pelicula>>> Get([FromQuery] ParametrosBusquedaPeliculas parametrosBusqueda)
+        public async Task<ActionResult<List<Peliculas>>> Get([FromQuery] ParametrosBusquedaPeliculas parametrosBusqueda)
         {
             var peliculasQueryable = context.Peliculas.AsQueryable();
 
@@ -107,13 +107,13 @@ namespace BlazorPeliculas.Server.Controllers
             if (parametrosBusqueda.Estrenos)
             {
                 var hoy = DateTime.Today;
-                peliculasQueryable = peliculasQueryable.Where(x => x.Lanzamiento >= hoy);
+                peliculasQueryable = peliculasQueryable.Where(x => x.FechaLanzamiento >= hoy);
             }
 
             if (parametrosBusqueda.GeneroId != 0)
             {
                 peliculasQueryable = peliculasQueryable
-                    .Where(x => x.GenerosPelicula.Select(y => y.GeneroId)
+                    .Where(x => x.GenerosPelicula.Select(y => y.GenerosId)
                     .Contains(parametrosBusqueda.GeneroId));
             }
 
@@ -163,7 +163,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(Pelicula pelicula)
+        public async Task<ActionResult<int>> Post(Peliculas pelicula)
         {
             if (!string.IsNullOrWhiteSpace(pelicula.Poster))
             {
@@ -185,7 +185,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Pelicula pelicula)
+        public async Task<ActionResult> Put(Peliculas pelicula)
         {
             var peliculaDB = await context.Peliculas.FirstOrDefaultAsync(x => x.Id == pelicula.Id);
 
@@ -223,7 +223,7 @@ namespace BlazorPeliculas.Server.Controllers
         {
             var existe = await context.Peliculas.AnyAsync(x => x.Id == id);
             if (!existe) { return NotFound(); }
-            context.Remove(new Pelicula { Id = id });
+            context.Remove(new Peliculas { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }

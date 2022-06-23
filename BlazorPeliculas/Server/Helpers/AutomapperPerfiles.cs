@@ -11,10 +11,10 @@ namespace BlazorPeliculas.Server.Helpers
     {
         public AutomapperPerfiles()
         {
-            CreateMap<Persona, Persona>()
+            CreateMap<Personas, Personas>()
                 .ForMember(x => x.Foto, option => option.Ignore());
 
-            CreateMap<Pelicula, Pelicula>()
+            CreateMap<Peliculas, Peliculas>()
                 .ForMember(x => x.Poster, option => option.Ignore());
         }
     }

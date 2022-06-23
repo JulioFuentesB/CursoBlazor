@@ -20,7 +20,7 @@ namespace BlazorPeliculas.Server.Controllers
         private readonly IMapper mapper;
 
         public PersonasController(ApplicationDbContext context,
-            IAlmacenadorArchivos almacenadorDeArchivos,
+           IAlmacenadorArchivos almacenadorDeArchivos,
             IMapper mapper)
         {
             this.context = context;
@@ -29,7 +29,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Persona>>> Get([FromQuery] Paginacion paginacion)
+        public async Task<ActionResult<List<Personas>>> Get([FromQuery] Paginacion paginacion)
         {
             var queryable = context.Personas.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnRespuesta(queryable, paginacion.CantidadRegistros);
@@ -37,7 +37,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Persona>> Get(int id)
+        public async Task<ActionResult<Personas>> Get(int id)
         {
             var persona = await context.Personas.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -47,16 +47,16 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet("buscar/{textoBusqueda}")]
-        public async Task<ActionResult<List<Persona>>> Get(string textoBusqueda)
+        public async Task<ActionResult<List<Personas>>> Get(string textoBusqueda)
         {
-            if (string.IsNullOrWhiteSpace(textoBusqueda)) { return new List<Persona>(); }
+            if (string.IsNullOrWhiteSpace(textoBusqueda)) { return new List<Personas>(); }
             textoBusqueda = textoBusqueda.ToLower();
             return await context.Personas
                 .Where(x => x.Nombre.ToLower().Contains(textoBusqueda)).ToListAsync();
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(Persona persona)
+        public async Task<ActionResult<int>> Post(Personas persona)
         {
             if (!string.IsNullOrWhiteSpace(persona.Foto))
             {
@@ -70,7 +70,7 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Persona persona)
+        public async Task<ActionResult> Put(Personas persona)
         {
             var personaDB = await context.Personas.FirstOrDefaultAsync(x => x.Id == persona.Id);
 
@@ -94,7 +94,7 @@ namespace BlazorPeliculas.Server.Controllers
         {
             var existe = await context.Personas.AnyAsync(x => x.Id == id);
             if (!existe) { return NotFound(); }
-            context.Remove(new Persona { Id = id });
+            context.Remove(new Personas { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }
