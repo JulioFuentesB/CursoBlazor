@@ -1,3 +1,4 @@
+using BlazorPeliculas.Server.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +27,8 @@ namespace BlazorPeliculas.Server
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<IAlmacenadorArchivos, AlmacenadorArchivosAzStorage>();
+            services.AddScoped<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews().AddNewtonsoftJson(
                 options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);

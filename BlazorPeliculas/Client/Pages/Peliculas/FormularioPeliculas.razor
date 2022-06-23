@@ -1,4 +1,5 @@
-﻿
+﻿@inject IRepositorio Repositorio
+
 <EditForm Model="Peliculas" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="form-group">
@@ -93,11 +94,14 @@
 
     private async Task<IEnumerable<Personas>> BuscarActores(string searchText)
     {
-        return new List<Personas>()
-            {
-            new Personas(){Id=1, Nombre="Tom Holland", Foto = "https://m.media-amazon.com/images/M/MV5BNTAzMzA3NjQwOF5BMl5BanBnXkFtZTgwMDUzODQ5MTI@._V1_UY317_CR23,0,214,317_AL_.jpg"},
-            new Personas(){Id=2, Nombre="Tom Hanks", Foto = "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_UY317_CR2,0,214,317_AL_.jpg"}
-        };
+        //return new List<Personas>()
+        //    {
+        //    new Personas(){Id=1, Nombre="Tom Holland", Foto = "https://m.media-amazon.com/images/M/MV5BNTAzMzA3NjQwOF5BMl5BanBnXkFtZTgwMDUzODQ5MTI@._V1_UY317_CR23,0,214,317_AL_.jpg"},
+        //    new Personas(){Id=2, Nombre="Tom Hanks", Foto = "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_UY317_CR2,0,214,317_AL_.jpg"}
+        //};
+
+        var responseHttp = await Repositorio.Get<List<Personas>>($"api/personas/buscar/{searchText}");
+        return responseHttp.Response;
     }
    }
 

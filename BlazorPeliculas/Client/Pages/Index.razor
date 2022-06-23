@@ -1,21 +1,38 @@
 ﻿@page "/"
 @inject IRepositorio repositorio
+
 <hr />
 
 <div>
-    <h3>Listado de peliculas</h3>
-    <ListadoPeliculas Peliculas="PeliculasIndex">
+    <h3>En cartelera</h3>
+    <ListadoPeliculas Peliculas="EnCartelera">
+    </ListadoPeliculas>
+</div>
+
+<div>
+    <h3>Proximos extrenos</h3>
+    <ListadoPeliculas Peliculas="FuturosExtrenos">
     </ListadoPeliculas>
 </div>
 
 @code {
 
-    private List<BlazorPeliculas.Shared.Entidades.Peliculas> PeliculasIndex;
+    private List<BlazorPeliculas.Shared.Entidades.Peliculas> FuturosExtrenos;
+    private List<BlazorPeliculas.Shared.Entidades.Peliculas> EnCartelera;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        //var lista = listado.Peliculas;
-        PeliculasIndex = repositorio.ObtenrPeliculas();
+        await Cargar();
+    }
+
+
+    private async Task Cargar()
+    {
+        var responseHttp = await repositorio.Get<HomePageDTO>("api/peliculas");
+
+        FuturosExtrenos = responseHttp.Response.ProximosEstrenos;
+        EnCartelera = responseHttp.Response.PeliculasEnCartelera;
+
 
     }
 

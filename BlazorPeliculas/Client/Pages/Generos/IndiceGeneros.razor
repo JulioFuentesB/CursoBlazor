@@ -1,6 +1,7 @@
 ﻿@page "/generos"
 @inject IRepositorio repositorio
 
+
 <h3>Indice Géneros</h3>
 
 
@@ -21,14 +22,13 @@
             <tbody>
                 @foreach (var item in Generos)
                 {
-                    <tr>
-                        <td>
-                            <a href="/generos/editar/@item.Id" class="btn btn-success">Editar</a>
-                            @*<button @onclick="@(() => BorrarGenero(item))" class="btn btn-danger">Borrar</button>*@
-                        </td>
-                        <td>@item.Nombre</td>
-                    </tr>
-                  }
+<tr>
+    <td>
+        <a href="/generos/editar/@item.Id" class="btn btn-success">Editar</a>
+        @*<button @onclick="@(() => BorrarGenero(item))" class="btn btn-danger">Borrar</button>*@
+    </td>
+    <td>@item.Nombre</td>
+</tr>}
             </tbody>
         </table>
     </HayRegistrosCompleto>
@@ -36,19 +36,15 @@
 
 
 
-@code {
-
-    public List<Generos> Generos { get; set; }
-    protected async override Task OnInitializedAsync()
-    {
-        await Cargar();
-    }
+@code { public List<Generos> Generos { get; set; }
+            protected async override Task OnInitializedAsync()
+            {
+                await Cargar();
+            }
 
 
-    private async Task Cargar()
-    {
-        var responseHttp = await repositorio.Get<List<Generos>>("api/generos");
-        Generos = responseHttp.Response;
-    }
-
- }
+            private async Task Cargar()
+            {
+                var responseHttp = await repositorio.Get<List<Generos>>("api/generos");
+                Generos = responseHttp.Response;
+            } }
