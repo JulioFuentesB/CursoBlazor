@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BlazorPeliculas.Shared.Entidades
 {
-    public class Personas
+    public class Actores
     {
         public int Id { get; set; }
         [Required]
@@ -15,11 +16,13 @@ namespace BlazorPeliculas.Shared.Entidades
         [Required]
         public DateTime? FechaNacimiento { get; set; }
         public List<PeliculasActores> PeliculasActores { get; set; }
-
+        [NotMapped]
+        public string Personaje { get; set; }
+ 
 
         public override bool Equals(object obj)
         {
-            if (obj is Personas p2)
+            if (obj is Actores p2)
             {
                 return Id == p2.Id;
             }

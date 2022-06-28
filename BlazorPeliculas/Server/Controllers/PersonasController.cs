@@ -29,17 +29,17 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Personas>>> Get([FromQuery] Paginacion paginacion)
+        public async Task<ActionResult<List<Actores>>> Get([FromQuery] Paginacion paginacion)
         {
-            var queryable = context.Personas.AsQueryable();
+            var queryable = context.Actores.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnRespuesta(queryable, paginacion.CantidadRegistros);
             return await queryable.Paginar(paginacion).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Personas>> Get(int id)
+        public async Task<ActionResult<Actores>> Get(int id)
         {
-            var persona = await context.Personas.FirstOrDefaultAsync(x => x.Id == id);
+            var persona = await context.Actores.FirstOrDefaultAsync(x => x.Id == id);
 
             if (persona == null) { return NotFound(); }
 
@@ -47,16 +47,16 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet("buscar/{textoBusqueda}")]
-        public async Task<ActionResult<List<Personas>>> Get(string textoBusqueda)
+        public async Task<ActionResult<List<Actores>>> Get(string textoBusqueda)
         {
-            if (string.IsNullOrWhiteSpace(textoBusqueda)) { return new List<Personas>(); }
+            if (string.IsNullOrWhiteSpace(textoBusqueda)) { return new List<Actores>(); }
             textoBusqueda = textoBusqueda.ToLower();
-            return await context.Personas
+            return await context.Actores
                 .Where(x => x.Nombre.ToLower().Contains(textoBusqueda)).ToListAsync();
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(Personas persona)
+        public async Task<ActionResult<int>> Post(Actores persona)
         {
             if (!string.IsNullOrWhiteSpace(persona.Foto))
             {
@@ -70,9 +70,9 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(Personas persona)
+        public async Task<ActionResult> Put(Actores persona)
         {
-            var personaDB = await context.Personas.FirstOrDefaultAsync(x => x.Id == persona.Id);
+            var personaDB = await context.Actores.FirstOrDefaultAsync(x => x.Id == persona.Id);
 
             if (personaDB == null) { return NotFound(); }
 
@@ -92,9 +92,9 @@ namespace BlazorPeliculas.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.Personas.AnyAsync(x => x.Id == id);
+            var existe = await context.Actores.AnyAsync(x => x.Id == id);
             if (!existe) { return NotFound(); }
-            context.Remove(new Personas { Id = id });
+            context.Remove(new Actores { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }

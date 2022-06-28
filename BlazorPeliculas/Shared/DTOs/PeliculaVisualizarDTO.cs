@@ -9,7 +9,7 @@ namespace BlazorPeliculas.Shared.DTOs
     {
         public Peliculas Pelicula { get; set; }
         public List<Generos> Generos { get; set; }
-        public List<Personas> Actores { get; set; }
+        public List<Actores> Actores { get; set; }
         public int VotoUsuario { get; set; }
         public double PromedioVotos { get; set; }
     }

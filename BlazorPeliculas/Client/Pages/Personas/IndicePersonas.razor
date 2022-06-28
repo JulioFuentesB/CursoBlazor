@@ -21,7 +21,7 @@
                 {
                     <tr>
                         <td>
-                            <a href="/generos/editar/@item.Id" class="btn btn-success">Editar</a>
+                            <a href="/personas/editar/@item.Id" class="btn btn-success">Editar</a>
                             @*<button @onclick="@(() => BorrarGenero(item))" class="btn btn-danger">Borrar</button>*@
                         </td>
                         <td>@item.Nombre</td>
@@ -32,7 +32,7 @@
     </HayRegistrosCompleto>
 </ListadoGenerco> 
 
-@code { public List<Personas> Personas { get; set; }
+@code { public List<Actores> Personas { get; set; }
     protected async override Task OnInitializedAsync()
     {
         await Cargar();
@@ -41,7 +41,7 @@
 
     private async Task Cargar()
     {
-        var responseHttp = await repositorio.Get<List<Personas>>("api/personas");
+        var responseHttp = await repositorio.Get<List<Actores>>("api/personas");
         Personas = responseHttp.Response;
     }
   }

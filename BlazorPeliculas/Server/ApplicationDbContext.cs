@@ -17,8 +17,8 @@ namespace BlazorPeliculas.Server
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GenerosPeliculas>().HasKey(x => new { x.GenerosId, x.PeliculasId });
-            modelBuilder.Entity<PeliculasActores>().HasKey(x => new { x.PeliculasId, x.PersonasId });
+            modelBuilder.Entity<PeliculasGeneros>().HasKey(x => new { x.GeneroId, x.PeliculasId });
+            modelBuilder.Entity<PeliculasActores>().HasKey(x => new { x.PeliculasId, x.ActorId });
 
             //var personas = new List<Persona>();
             //for (int i = 5; i < 100; i++)
@@ -36,10 +36,10 @@ namespace BlazorPeliculas.Server
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<GenerosPeliculas> GenerosPeliculas { get; set; }
+        public DbSet<PeliculasGeneros> PeliculasGeneros { get; set; }
         public DbSet<Peliculas> Peliculas { get; set; }
         public DbSet<Generos> Generos { get; set; }
-        public DbSet<Personas> Personas { get; set; }
+        public DbSet<Actores> Actores { get; set; }
         public DbSet<PeliculasActores> PeliculasActores { get; set; }
     }
 }

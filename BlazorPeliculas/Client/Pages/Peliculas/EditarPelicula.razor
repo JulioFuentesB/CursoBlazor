@@ -10,6 +10,7 @@
     Peliculas Pelicula = new Peliculas();
     private List<Generos> GenerosNoSeleccionados = new List<Generos>();
     private List<Generos> GenerosSeleccionados = new List<Generos>();
+    private List<Actores> ActoresSeleccionados { get; set; }
 
     protected override void OnInitialized()
     {
@@ -26,9 +27,9 @@
 
 
         GenerosSeleccionados = new List<Generos>()
-        {            
+        {
             new Generos() { Id = 3, Nombre = "Acción" },
-            
+
          };
 
     }

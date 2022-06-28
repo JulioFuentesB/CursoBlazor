@@ -13,13 +13,13 @@ namespace BlazorPeliculas.Shared.Entidades
         [Required]
         public string Titulo { get; set; }
         public string Resumen { get; set; }
-        public bool EnCartelera { get; set; }
+        public bool EnCines { get; set; }
         public string Trailer { get; set; }
         [Required]
         public DateTime? FechaLanzamiento { get; set; }
         public string Poster { get; set; }
-        public List<GenerosPeliculas> GenerosPelicula { get; set; } = new List<GenerosPeliculas>();
-        public List<PeliculasActores> PeliculasActor { get; set; }
+        public List<PeliculasGeneros> PeliculasGeneros { get; set; } = new List<PeliculasGeneros>();
+        public List<PeliculasActores> PeliculasActores { get; set; }
 
         public string TituloCortado
         {

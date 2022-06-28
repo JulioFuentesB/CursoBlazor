@@ -12,8 +12,8 @@
     <div class="form-group">
         <label>En cartelera:</label>
         <div>
-            <InputCheckbox @bind-Value="@Peliculas.EnCartelera" />
-            <ValidationMessage For="@(() => Peliculas.EnCartelera)" />
+            <InputCheckbox @bind-Value="@Peliculas.EnCines" />
+            <ValidationMessage For="@(() => Peliculas.EnCines)" />
         </div>
     </div>
     <div class="form-group">
@@ -70,7 +70,7 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     [Parameter] public List<Generos> GenerosSeleccionados { get; set; } = new List<Generos>();
     [Parameter] public List<Generos> GenerosNoSeleccionados { get; set; } = new List<Generos>();
-    [Parameter] public List<Personas> ActoresSeleccionados { get; set; } = new List<Personas>();
+    [Parameter] public List<Actores> ActoresSeleccionados { get; set; } = new List<Actores>();
 
     private List<SelectorMultipleModel> Seleccionados { get; set; } = new List<SelectorMultipleModel>();
     private List<SelectorMultipleModel> NoSeleccionados { get; set; } = new List<SelectorMultipleModel>();
@@ -92,7 +92,7 @@
         Peliculas.Poster = imagenBase64;
     }
 
-    private async Task<IEnumerable<Personas>> BuscarActores(string searchText)
+    private async Task<IEnumerable<Actores>> BuscarActores(string searchText)
     {
         //return new List<Personas>()
         //    {
@@ -100,7 +100,7 @@
         //    new Personas(){Id=2, Nombre="Tom Hanks", Foto = "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_UY317_CR2,0,214,317_AL_.jpg"}
         //};
 
-        var responseHttp = await Repositorio.Get<List<Personas>>($"api/personas/buscar/{searchText}");
+        var responseHttp = await Repositorio.Get<List<Actores>>($"api/personas/buscar/{searchText}");
         return responseHttp.Response;
     }
    }

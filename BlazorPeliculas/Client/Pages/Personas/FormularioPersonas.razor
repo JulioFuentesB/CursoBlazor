@@ -1,26 +1,26 @@
-﻿<EditForm Model="Persona" OnValidSubmit="OnValidSubmit">
+﻿<EditForm Model="Actor" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
 
     <div class="form-group">
         <label>Nombre:</label>
         <div>
-            <InputText class="form-control" @bind-Value="@Persona.Nombre" />
-            <ValidationMessage For="@(() => Persona.Nombre)" />
+            <InputText class="form-control" @bind-Value="@Actor.Nombre" />
+            <ValidationMessage For="@(() => Actor.Nombre)" />
         </div>
     </div>
     <div class="form-group">
         <label>Fecha Nacimiento:</label>
         <div>
-            <InputDate class="form-control" @bind-Value="@Persona.FechaNacimiento" />
-            <ValidationMessage For="@(() => Persona.FechaNacimiento)" />
+            <InputDate class="form-control" @bind-Value="@Actor.FechaNacimiento" />
+            <ValidationMessage For="@(() => Actor.FechaNacimiento)" />
         </div>
     </div>
     <div class="form-group">
         <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenURL="@imagenURL" />
     </div>
     <div class="form-group form-markdown">
-        <InputMarkdown @bind-Value="@Persona.Biografia"
-                       For="@(() => Persona.Biografia)"
+        <InputMarkdown @bind-Value="@Actor.Biografia"
+                       For="@(() => Actor.Biografia)"
                        Label="Biografía" />
     </div>
 
@@ -29,22 +29,22 @@
 
 
 @code {
-    [Parameter] public Personas Persona { get; set; }
+    [Parameter] public Actores Actor { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     private string imagenURL;
 
     protected override void OnInitialized()
     {
-        if (!string.IsNullOrWhiteSpace(Persona.Foto))
+        if (!string.IsNullOrWhiteSpace(Actor.Foto))
         {
-            imagenURL = Persona.Foto;
-            Persona.Foto = null;
+            imagenURL = Actor.Foto;
+            Actor.Foto = null;
         }
     }
 
     private void ImagenSeleccionada(string imagenBase64)
     {
-        Persona.Foto = imagenBase64;
+        Actor.Foto = imagenBase64;
         imagenURL = null;
     }
 }
