@@ -21,7 +21,6 @@ namespace BlazorPeliculas.Client.Repositorios
         private JsonSerializerOptions OpcionesPorDefectoJSON =>
        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
-
         public async Task<HttpResponseWrapper<T>> Get<T>(string url)
         {
             var responseHTTP = await httpClient.GetAsync(url);
@@ -53,7 +52,6 @@ namespace BlazorPeliculas.Client.Repositorios
             return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp);
         }
 
-
         public async Task<HttpResponseWrapper<TResponse>> Post<T, TResponse>(string url, T enviar)
         {
             var enviarJSON = JsonSerializer.Serialize(enviar);
@@ -70,7 +68,6 @@ namespace BlazorPeliculas.Client.Repositorios
             }
         }
 
-
         public async Task<HttpResponseWrapper<object>> Delete(string url)
         {
             var responseHTTP = await httpClient.DeleteAsync(url);
@@ -82,7 +79,6 @@ namespace BlazorPeliculas.Client.Repositorios
             var responseString = await httpResponse.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(responseString, jsonSerializerOptions);
         }
-
 
         public List<Peliculas> ObtenrPeliculas()
         {

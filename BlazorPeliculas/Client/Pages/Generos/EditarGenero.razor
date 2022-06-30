@@ -1,22 +1,63 @@
 ﻿@page "/generos/editar/{GeneroId:int}"
+@inject IRepositorio repositorio
+@inject NavigationManager navigation
+@inject IMostrarMensajes mostrarMensajes
 
 <h3>Editar Género</h3>
 
+@if (Genero== null)
+{
+    <text>Cargando..</text>
+}
+else
+{
 <FormularioGenero OnValidSubmit="Editar" Genero="Genero" />
+}
 
-@code { 
-           [Parameter] public int GeneroId { get; set; }
-            private Generos Genero;
 
-            protected override void OnInitialized()
+@code { [Parameter] public int GeneroId { get; set; }
+    private Generos Genero;
+
+    protected async override Task OnInitializedAsync()
+    {
+        // Genero = new Generos() { Id = GeneroId, Nombre = "Comedia" };
+
+        var httpResponse = await repositorio.Get<Generos>($"api/generos/{GeneroId}");
+
+        if (httpResponse.Error)
+        {
+            if (httpResponse.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                Genero = new Generos() { Id = GeneroId, Nombre = "Comedia" };
+                navigation.NavigateTo("generos");
             }
-
-            private void Editar()
+            else
             {
-                Console.WriteLine("Editando Género de Película");
-                Console.WriteLine($"Id: {Genero.Id}");
-                Console.WriteLine($"Nombre: {Genero.Nombre}");
-            } 
+                await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+            }
+        }
+        else
+        {
+            Genero = httpResponse.Response;
+        }
     }
+
+    private async Task Editar()
+    {
+        //Console.WriteLine("Editando Género de Película");
+        //Console.WriteLine($"Id: {Genero.Id}");
+        //Console.WriteLine($"Nombre: {Genero.Nombre}");
+
+        var httpResponse = await repositorio.Put("api/generos",Genero);
+
+        if (httpResponse.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+        }
+        else
+        {
+            navigation.NavigateTo("generos");
+        }
+
+
+    }
+}

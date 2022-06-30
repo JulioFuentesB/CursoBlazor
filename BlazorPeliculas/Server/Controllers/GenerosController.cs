@@ -21,9 +21,8 @@ namespace BlazorPeliculas.Server.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<Generos>>> Get()
-        {
-            
-              var generos=  await context.Generos.ToListAsync();
+        {           
+            var generos=  await context.Generos.ToListAsync();
             return generos;
         }
 
